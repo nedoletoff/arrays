@@ -139,11 +139,12 @@ void push_front(list_t* l, int val)	//O(1)
 	++l->size;
 }
 
-int find(list_t* l, int val, node_t* cur)
+int find(list_t* l, int val, node_t** n)
 {
+	node_t* cur = (node_t*) malloc(sizeof(node_t));
 	cur->next = l->head;
 	cur->prev = NULL;
-	cur->value = (val ? 0 : 1);
+	cur->value = !(val) ;
 	while (cur->value != val && cur->next != NULL)
 	{
 		cur->value = cur->next->value;
@@ -151,12 +152,16 @@ int find(list_t* l, int val, node_t* cur)
 		cur->next = cur->next->next;
 	}
 	if (cur->value == val)
+	{
+		*n = (cur->prev->next);
 		return 1;
+	}
 	else
 	{
 		cur->next = NULL;
 		cur->value = 0;
 		cur->prev = NULL;
+		*n = NULL;
 	}
 
 	return 0;
@@ -166,7 +171,7 @@ int main()
 {
 	int check = 0;
 	list_t l1;
-	node_t c;
+	node_t* c = NULL;
 	init(&l1);
 
 	for (int i = 0; i < 12; ++i)
@@ -174,8 +179,6 @@ int main()
 
 	check = find(&l1, 6, &c);
 	print(&l1);
-	printf("check - %d\n", check);
-	printf("node_t - %d %d %d\n", c.prev->value, c.value, c.next->value);
 	if (check)
 		erase(&l1, c);
 	print(&l1);
