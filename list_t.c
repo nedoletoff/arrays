@@ -153,7 +153,12 @@ int find(list_t* l, int val, node_t** n)
 	}
 	if (cur->value == val)
 	{
-		*n = (cur->prev->next);
+		if (!cur->prev)
+			*n = l->head;
+
+		else
+			*n = cur->prev->next;
+
 		return 1;
 	}
 	else
@@ -175,11 +180,10 @@ int main()
 	init(&l1);
 
 	for (int i = 0; i < 12; ++i)
-		push_back(&l1, i);
+		push_back(&l1, i%5);
 
-	check = find(&l1, 6, &c);
 	print(&l1);
-	if (check)
+	while (find(&l1, 1, &c))
 		erase(&l1, c);
 	print(&l1);
 
