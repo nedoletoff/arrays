@@ -94,7 +94,7 @@ int get(list_t* l, int i, int* ans)	//O(n)
 	return 0;
 }
 
-void insert(node_t* cur, list_t* l, int val)	//O(n)
+void insert(list_t* l, node_t* cur, int val)	//O(1)
 {
 	node_t* n = (node_t*) malloc(sizeof(node_t));
 	if (cur == l->tail)
