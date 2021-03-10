@@ -1,19 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct node_t 
-{
-	int value;
-	struct node_t* prev;
-	struct node_t* next;
-} node_t;
-
-typedef struct
-{
-	node_t* head;
-	node_t* tail;
-	size_t size;
-} list_t;
+#include "list_t.h"
 
 void init(list_t* l)		//O(1)
 {
@@ -172,21 +159,3 @@ int find(list_t* l, int val, node_t** n)
 	return 0;
 }
 
-int main()
-{
-	int check = 0;
-	list_t l1;
-	node_t* c = NULL;
-	init(&l1);
-
-	for (int i = 0; i < 12; ++i)
-		push_back(&l1, i%5);
-
-	print(&l1);
-	while (find(&l1, 1, &c))
-		erase(&l1, c);
-	print(&l1);
-
-
-	return 0;
-}

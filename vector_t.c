@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-typedef struct 
-{
-	int* data;
-	size_t size;
-	size_t capacity;
-} vector_t;
+#include "vector_t.h"
 
 void init(vector_t* v) 		//O(1)
 {
@@ -36,7 +29,7 @@ void push_back(vector_t* v, int val)	//O(n) or O(1)
 	v->data[v->size++] = val;
 }
 
-int  set(vector_t* v, int i, int val)
+int set(vector_t* v, int i, int val)
 {
 	if (i >= 0 && i < v->size)
 		v->data[i] = val;
@@ -103,18 +96,3 @@ int find(vector_t* v, int value)         //O(n)
 	return -1;
 }
 
-int main()
-{
-    vector_t v1, v2;
-    init(&v1); init(&v2);
-    for (int i = 0; i < 10; ++i)
-        push_back(&v1, i);
-    for (int i = 0; i <12; ++i)
-        push_back(&v2, 1);
-    print(&v1); print(&v2);
-    printf("number - %d\n", find(&v1, 3));
-    
-    destroy(&v1);destroy(&v2);
-        
-	return 0;
-}
